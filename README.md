@@ -54,6 +54,28 @@
     | `users` | `user_id` (TEXT, PRIMARY KEY), `topic_id` (TEXT), `user_state` (TEXT), `is_blocked` (INTEGER), `block_count` (INTEGER), `user_info_json` (TEXT) |
     | `config` | `key` (TEXT, PRIMARY KEY), `value` (TEXT) |
     | `messages` | `user_id` (TEXT), `message_id` (TEXT), `text` (TEXT), `date` (INTEGER), PRIMARY KEY (`user_id`, `message_id`) |
+-- migrations/0001_create_tables.sql
+CREATE TABLE IF NOT EXISTS users (
+  user_id TEXT PRIMARY KEY,
+  topic_id TEXT,
+  user_state TEXT,
+  is_blocked INTEGER,
+  block_count INTEGER,
+  user_info_json TEXT
+);
+
+CREATE TABLE IF NOT EXISTS config (
+  key TEXT PRIMARY KEY,
+  value TEXT
+);
+
+CREATE TABLE IF NOT EXISTS messages (
+  user_id TEXT,
+  message_id TEXT,
+  text TEXT,
+  date INTEGER,
+  PRIMARY KEY (user_id, message_id)
+);
 
 ### 步骤二：创建 Worker 服务并部署代码
 
